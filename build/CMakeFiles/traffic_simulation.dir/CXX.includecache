@@ -42,6 +42,24 @@ memory
 TrafficObject.h
 /home/workspace/Concurrent-Traffic-Simulation/src/TrafficObject.h
 
+/home/workspace/Concurrent-Traffic-Simulation/src/TrafficLight.cpp
+iostream
+-
+random
+-
+TrafficLight.h
+/home/workspace/Concurrent-Traffic-Simulation/src/TrafficLight.h
+
+/home/workspace/Concurrent-Traffic-Simulation/src/TrafficLight.h
+mutex
+-
+deque
+-
+condition_variable
+-
+TrafficObject.h
+/home/workspace/Concurrent-Traffic-Simulation/src/TrafficObject.h
+
 /home/workspace/Concurrent-Traffic-Simulation/src/TrafficObject.h
 vector
 -

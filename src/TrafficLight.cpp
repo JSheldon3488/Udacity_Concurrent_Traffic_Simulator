@@ -23,10 +23,15 @@ void MessageQueue<T>::send(T &&msg)
 
 /* Implementation of class "TrafficLight" */
 
-/* 
+
 TrafficLight::TrafficLight()
 {
     _currentPhase = TrafficLightPhase::red;
+}
+
+TrafficLightPhase TrafficLight::getCurrentPhase()
+{
+    return _currentPhase;
 }
 
 void TrafficLight::waitForGreen()
@@ -36,14 +41,10 @@ void TrafficLight::waitForGreen()
     // Once it receives TrafficLightPhase::green, the method returns.
 }
 
-TrafficLightPhase TrafficLight::getCurrentPhase()
-{
-    return _currentPhase;
-}
-
 void TrafficLight::simulate()
 {
     // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
+    threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
 }
 
 // virtual function which is executed in a thread
@@ -53,6 +54,23 @@ void TrafficLight::cycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+
+    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        //Get a random value between 4 and 6 (seconds for toggling light)
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::uniform_int_distribution<int> uni(4,6);
+        auto random_int = uni(rng);
+        //Calculate difference between start time and current time and toggle light if it has been long enough
+        long timeSinceLastChange = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start).count();
+        if (timeSinceLastChange > random_int) {
+            _currentPhase = this->getCurrentPhase() == TrafficLightPhase::red ? TrafficLightPhase::green : TrafficLightPhase::red; 
+            //Send message
+            //Reset the start timer for a new cycle
+            start = std::chrono::system_clock::now();
+        }
+    }
 }
 
-*/
