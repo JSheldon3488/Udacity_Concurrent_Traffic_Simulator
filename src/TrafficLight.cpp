@@ -49,9 +49,8 @@ void TrafficLight::waitForGreen()
     // runs and repeatedly calls the receive function on the message queue. 
     // Once it receives TrafficLightPhase::green, the method returns.
     while (true) {
-        if (_messages.receive() == TrafficLightPhase::green) {
+        if (_messages.receive() == TrafficLightPhase::green)
             return;
-        }
     }
 }
 
@@ -68,14 +67,16 @@ void TrafficLight::cycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+   
+   // Generate Random cycleDuration for the TrafficLights
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<int> uni(4000,6000); //Increased time to make graphic better
+    std::uniform_int_distribution<int> uni(4000,6000);
     auto cycleDuration = uni(rng);
-    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
+    // Cycle the lights and alert _message queue to process this change
+    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
     while (true) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
         //Calculate difference between start time and current time and toggle light if it has been long enough
         int timeSinceLastChange = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start).count();
         if (timeSinceLastChange >= cycleDuration) {
@@ -83,7 +84,8 @@ void TrafficLight::cycleThroughPhases()
             _currentPhase = _currentPhase == TrafficLightPhase::red ? TrafficLightPhase::green : TrafficLightPhase::red; 
             //Send message
             _messages.send(std::move(_currentPhase));
-            //Reset the start timer for a new cycle
+            // Wait between cyceles and reset timers
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
             start = std::chrono::system_clock::now();
             cycleDuration = uni(rng);
         }

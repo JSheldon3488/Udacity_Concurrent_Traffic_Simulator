@@ -31,7 +31,6 @@ private:
     std::deque<T> _queue;
     std::mutex _mutex;
     std::condition_variable _cond;
-    
 };
 
 // FP.1 : Define a class „TrafficLight“ which is a child class of TrafficObject. 
@@ -47,7 +46,6 @@ public:
     TrafficLight();
     // getters / setters
     TrafficLightPhase getCurrentPhase();
-
 
     // typical behaviour methods
     void waitForGreen();
