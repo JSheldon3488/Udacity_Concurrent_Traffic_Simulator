@@ -6,20 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/Concurrent-Traffic-Simulation/src/Graphics.cpp
-iostream
--
-opencv2/core.hpp
--
-opencv2/imgproc.hpp
--
-opencv2/highgui.hpp
--
-Graphics.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Graphics.h
-Intersection.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
-
 /home/workspace/Concurrent-Traffic-Simulation/src/Graphics.h
 string
 -
@@ -29,24 +15,6 @@ opencv2/core.hpp
 -
 TrafficObject.h
 /home/workspace/Concurrent-Traffic-Simulation/src/TrafficObject.h
-
-/home/workspace/Concurrent-Traffic-Simulation/src/Intersection.cpp
-iostream
--
-thread
--
-chrono
--
-future
--
-random
--
-Street.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Street.h
-Intersection.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
-Vehicle.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Vehicle.h
 
 /home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
 vector
@@ -61,16 +29,6 @@ TrafficObject.h
 /home/workspace/Concurrent-Traffic-Simulation/src/TrafficObject.h
 TrafficLight.h
 /home/workspace/Concurrent-Traffic-Simulation/src/TrafficLight.h
-
-/home/workspace/Concurrent-Traffic-Simulation/src/Street.cpp
-iostream
--
-Vehicle.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Vehicle.h
-Intersection.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
-Street.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Street.h
 
 /home/workspace/Concurrent-Traffic-Simulation/src/Street.h
 TrafficObject.h
@@ -121,18 +79,6 @@ Intersection.h
 /home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
 Graphics.h
 /home/workspace/Concurrent-Traffic-Simulation/src/Graphics.h
-
-/home/workspace/Concurrent-Traffic-Simulation/src/Vehicle.cpp
-iostream
--
-random
--
-Street.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Street.h
-Intersection.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Intersection.h
-Vehicle.h
-/home/workspace/Concurrent-Traffic-Simulation/src/Vehicle.h
 
 /home/workspace/Concurrent-Traffic-Simulation/src/Vehicle.h
 TrafficObject.h

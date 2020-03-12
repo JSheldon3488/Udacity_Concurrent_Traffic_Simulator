@@ -14,8 +14,8 @@ T MessageQueue<T>::receive()
     // The received object should then be returned by the receive function. 
     std::unique_lock<std::mutex> ulock(_mutex);
     _cond.wait(ulock, [this](){ return !_queue.empty(); });
-    T msg = std::move(_queue.front());
-    _queue.pop_front();
+    T msg = std::move(_queue.back());
+    _queue.pop_back();
     return msg;
 }
 
@@ -26,6 +26,12 @@ void MessageQueue<T>::send(T &&msg)
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
     std::lock_guard<std::mutex> lock(_mutex);
+    //Need to wipe the queue on red lights or else a build up of messages can occur and send a false green
+    if (msg == TrafficLightPhase::red) {
+        while(!_queue.empty()){
+            _queue.pop_back();
+        }
+    }
     _queue.emplace_back(msg);
     _cond.notify_one();
 }
